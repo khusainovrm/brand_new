@@ -17,8 +17,9 @@ body {
 }
 
 .date {
-    color: #828282;
+    color: white;
     font-size: 15px;
+    font-family:'Lobster', cursive;
 }
 
 h1, h2, h3, h4 {
@@ -54,6 +55,7 @@ h1, h2, h3, h4 {
 .post2-titile {
 	font-size: 20pt;
 	padding: 0px 0px 0px 0px;
+    font-family:'Lobster', cursive;
 }
 
 .post2-text {
