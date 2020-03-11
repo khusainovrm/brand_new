@@ -1,29 +1,44 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
  <head>
         <title>Rinat's blog</title>
-    </head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static "css/blog.css" %}" />
+ </head>
     <body>
+    <div class="page-header">
+        <h1><a href="/">My blog</a></h1>
+    </div>
+
+
+
         <div>
             <h1><a href="/">Все записи:</a></h1>
         </div>
                 {% for post in posts %}
                     {{ post }}
                 {% endfor %}
-        <div>
+        <div class="content container">
+            <div class="row">
 
             <h2><a href="">Детализация всех записей</a></h2>
              {% block post %}
+                <div class="col-md-8">
                     {% for post in posts %}
-                <div>
+                        <div class="post">
 
-                    <h1>{{post.title}}</h1>
-                    <p>Текст статьи: {{post.text}}</p>
-                    <p>Автор статьи: {{ post.author|capfirst }}. Опубликована: {{post.published_date|date:"SHORT_DATE_FORMAT"}} </p>
+                    <h1><a href="">{{post.title}}</a></h1>
+                    <p> {{post.text}}</p>
+                                <div class="date">
+                                    <p>Автор статьи: {{ post.author|capfirst }}. Опубликована: {{post.published_date|date:"SHORT_DATE_FORMAT"}} </p>
                     <br>
-                </div>
+                                </div>
+                        </div>
                     {% endfor %}
+                </div>
                 {% endblock %}
+            </div>
 
         </div>
 
