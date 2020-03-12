@@ -1,9 +1,10 @@
 body {
-    margin-left: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .page-header {
-    background-color: #ff9400;
+    background-color: #B8860B;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
     border-radius: 10px;
@@ -17,17 +18,16 @@ body {
 }
 
 .date {
-    color: white;
+    color: black;
     font-size: 15px;
-    font-family:'Lobster', cursive;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
-.allnotes h1, .allnotes h1 a, .allnotes h1 a:visited, .allnotes h1 a:active {
-	background-color: #FF7F7F;
+.allnotes {
+    background-color: #DAA520;
     margin-top: 0px;
     padding: 10px 10px 10px 10px;
     color: white;

@@ -1,42 +1,13 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ru">
- <head>
-        <title>Rinat's blog</title>
-        <link rel="stylesheet" href="{% static "css/blog.css" %}" />
- </head>
-    <body>
-    <div class="page-header">
-        <h1><a href="/">My blog</a></h1>
-    </div>
-    <br>
+{% extends "base.html" %}
 
+{% block content %}
     <div class="allnotes">
-        <h1>Все записи:</h1>
-                {% for post in posts %}
-                    <div class = 'post'>{{ post }}</div>
-                {% endfor %}
+    {% for post in posts %}
+        {% if post.published_date != None %}
+            <h1><a href="{% url 'blog:post_detail' id=post.id %}">{{ post.title }}</a></h1>
+            <p>{{ post.text }}</p>
+            <p>{{ post.published_date }}</p>
+        {% endif %}
+    {% endfor %}
     </div>
-    <br>
-    <div class = "detailnotes">
-        <h1 class = "firstdetail"><a href="">Детализация всех записей</a></h1>
-            {% block post %}
-                    {% for post in posts %}
-                            <div class="post2-titile"> <b>{{post.title}} </b>
-                                <div class="post2-text">{{post.text}} </div>
-                                <div class="date">
-                                    <p>Автор статьи: {{ post.author|capfirst }}. Опубликована:
-                                        {{post.published_date|date:"SHORT_DATE_FORMAT"}} </p>
-                                </div>
-
-                        </div>
-                    {% endfor %}
-        {% endblock %}
-    </div> <br>
-
-        <div class="recent">
-            <h2>Последние новые записи</h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-        </div>
-    </body>
-</html>
+{% endblock %}
