@@ -4,7 +4,7 @@
     <div class="allnotes">
     {% for post in posts %}
         {% if post.published_date != None %}
-            <h1><a href="{% url 'blog:post_detail' id=post.id %}">{{ post.title }}</a></h1>
+            <h1><a href="{% url 'blog:post_detail_name' id=post.id %}">{{ post.title }}</a></h1>
             <p>{{ post.text }}</p>
             <p>{{ post.published_date }}</p>
         {% endif %}
