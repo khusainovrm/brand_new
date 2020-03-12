@@ -69,3 +69,8 @@ h1, h2, h3, h4 {
     padding: 20px 20px 20px 40px;
     border-radius: 10px;
 }
+
+.post-date-author {
+    font-size: 10px;
+    font-family:'Lobster', cursive;
+}
