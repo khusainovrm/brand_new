@@ -7,7 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
 
 class CommnentAdmin(admin.ModelAdmin):
-    list_display = ('post_original', 'id', 'pk', 'author', 'text')
+    list_display = ('post', 'id', 'pk', 'author', 'text')
 
 
 admin.site.register(Post, PostAdmin)

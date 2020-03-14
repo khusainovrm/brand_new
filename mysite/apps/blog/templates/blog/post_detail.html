@@ -18,16 +18,22 @@
 
 </div>
 <br>
-<div class="allnotescom">
-    {% if post.comment_set.all %}
-        <h1> Комментарии: </h1>
-        <div class="comments">
-            {% for comments in post.comment_set.all %}
-                <div class="comm-post"> {{ comments.text }} </div>
-                <i>Aвтор комментария: {{ comments }}</i><br><br>
 
-            {% endfor %}
+    {% if post.comment_set.all %}
+        <div class="allnotescom">
+            <h1> Комментарии: </h1>
+            <div class="comments">
+                {% for comments in post.comment_set.all %}
+                    <div class="comm-post"> {{ comments.text }} </div>
+                    <i>Aвтор комментария: {{ comments }}</i><br><br>
+
+                {% endfor %}
+            </div>
         </div>
-</div>
     {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_comment' id=post.id %}">Добавить комментарий</a>
+    {% endif %}
+
 {% endblock %}

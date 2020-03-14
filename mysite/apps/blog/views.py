@@ -48,5 +48,14 @@ def post_edit(request, id):
     com = Comment.objects.all()"""
 
 def comment_new(request, id):
-    comm = get_object_or_404(Comment, post_original=id)
-    return render(request, 'blog/comment_new.html', {"comm":comm})
+    post = get_object_or_404 (Post, id=id)
+    if request.method == "POST":
+        form = CommentForm (request.POST)
+        if form.is_valid ():
+            comment = form.save (commit=False)
+            comment.post = post
+            comment.save ()
+            return redirect('post_detail', id=post.id)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/comment_new.html', {"form":form})

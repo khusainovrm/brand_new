@@ -25,7 +25,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post_original = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.CharField("Author", max_length=200)
     text = models.TextField("Text")
 
