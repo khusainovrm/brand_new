@@ -25,7 +25,7 @@
             <div class="comments">
                 {% for comments in post.comment_set.all %}
                     <div class="comm-post"> {{ comments.text }} </div>
-                    <i>Aвтор комментария: {{ comments }}</i><br><br>
+                    <i>Aвтор комментария: {{ comments.author|capfirst }}</i><br><br>
 
                 {% endfor %}
             </div>

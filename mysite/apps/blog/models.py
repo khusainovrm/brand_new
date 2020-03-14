@@ -26,11 +26,11 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.CharField("Author", max_length=200)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)         #TODO сделать автоматичискую авторизацию автора
     text = models.TextField("Text")
 
     def __str__(self):
-        return self.author
+        return self.text
 
     class Meta:
         verbose_name = "Комментарий"

@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
 
 #Список всех постов
 def post_list(request):
@@ -54,6 +55,7 @@ def comment_new(request, id):
         if form.is_valid ():
             comment = form.save (commit=False)
             comment.post = post
+            comment.author = request.user
             comment.save ()
             return redirect('post_detail', id=post.id)
     else:
