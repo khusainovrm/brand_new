@@ -19,3 +19,19 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Статья"
+        verbose_name_plural = "Статьи"
+
+
+class Comment(models.Model):
+    post_original = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.CharField("Author", max_length=200)
+    text = models.TextField("Text")
+
+    def __str__(self):
+        return self.author
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"

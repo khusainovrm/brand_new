@@ -3,14 +3,31 @@
 {% block title %}Подробности{% endblock %}
 
 {% block content %}
-    <div class="allnotes">
-        {% if post.published_date %}
+<div class="allnotes">
+    {% if post.published_date %}
         <p>Опубликовано: {{ post.published_date }} </p>
-        {% endif %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-        {% if user.is_authenticated %}
-        <a href="{% url 'post_edit' pk=post.pk %}" >Edit</a>
-        {% endif %}
+    {% endif %}
 
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text|linebreaksbr }}</p>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'post_edit' id=post.id %}">Edit</a>
+    {% endif %}
+
+
+</div>
+<br>
+<div class="allnotescom">
+    {% if post.comment_set.all %}
+        <h1> Комментарии: </h1>
+        <div class="comments">
+            {% for comments in post.comment_set.all %}
+                <div class="comm-post"> {{ comments.text }} </div>
+                <i>Aвтор комментария: {{ comments }}</i><br><br>
+
+            {% endfor %}
+        </div>
+</div>
+    {% endif %}
 {% endblock %}

@@ -4,7 +4,7 @@ body {
 }
 
 .page-header {
-    background-color: #B8860B;
+    background-color: #1F7B67;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
     border-radius: 10px;
@@ -27,7 +27,7 @@ h1, h2, h3, h4 {
 }
 
 .allnotes {
-    background-color: #DAA520;
+    background-color: #00A480;
     margin-top: 0px;
     padding: 10px 10px 10px 10px;
     color: white;
@@ -40,7 +40,7 @@ h1, h2, h3, h4 {
 }
 
 .detailnotes, .detailnotes h1{
-	background-color: #FF7F7F;
+	background-color: #A66F00;
     margin-top: 0px;
     padding: 10px 10px 10px 10px;
     color: black;
@@ -73,4 +73,25 @@ h1, h2, h3, h4 {
 .post-date-author {
     font-size: 10px;
     font-family:'Lobster', cursive;
+}
+
+.comments {
+    background-color: #5ED2B8;
+    margin-top: 0px;
+    padding: 10px 10px 10px 10px;
+    color: black;
+    border-radius: 10px;
+}
+
+.allnotescom {
+    background-color: #006B53;
+    margin-top: 0px;
+    padding: 10px 10px 10px 10px;
+    color: white;
+    border-radius: 10px;
+}
+
+
+.comm-post {
+    font-size: 18px;
 }

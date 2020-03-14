@@ -2,7 +2,7 @@
     <ul>
         <li><a href ="{% url "post_list" %}">Список всех записей</a></li>
         {% if user.is_authenticated %}
-        <li><a href ="{% url "post_new" %}">Создать новую запись</a></li>
+            <li><a href ="{% url "post_new" %}">Создать новую запись</a></li>
         {% endif %}
         <li>About</li>
     </ul>
