@@ -38,3 +38,17 @@ class Comment(models.Model):
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
         ordering = ("-created",)
+
+
+
+class Search(models.Model):
+    search = models.CharField(max_length=500)
+    created = models.DateField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Поиск"
+        verbose_name_plural = "Поиск"
+        ordering = ("-created",)
+
+    def __str__(self):
+        return self.search
