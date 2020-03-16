@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
     <form method="POST"> {% csrf_token %}
         <p>Страница для комментариев</p>
         {{ form.as_p }}
-        <input type="submit"  value="Save" />
+          <button class="btn waves-effect waves-light" type="submit" name="action">Отправить
+              <i class="material-icons right">send</i>
     </form>
+</div><br><br>
 {% endblock %}

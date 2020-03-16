@@ -3,7 +3,8 @@
 {% block title %}Подробности{% endblock %}
 
 {% block content %}
-<div class="allnotes">
+  <div class="container">
+    <div class="section">
     {% if post.published_date %}
         <p>Опубликовано: {{ post.published_date }} </p>
     {% endif %}
@@ -12,28 +13,28 @@
     <p>{{ post.text|linebreaksbr }}</p>
 
     {% if user.is_authenticated %}
-        <a href="{% url 'post_edit' id=post.id %}">Edit</a>
+        <a href="{% url 'blog:post_edit' id=post.id %}">Редактировать</a>
     {% endif %}
-
-
-</div>
+    </div>
+  </div>
 <br>
 
-    {% if post.comment_set.all %}
-        <div class="allnotescom">
-            <h1> Комментарии: </h1>
-            <div class="comments">
+{% if user.is_authenticated %}
+  <div class="container">
+        {% if post.comment_set.all %}
+            <h5> <i> Комментарии: </i></h5>
+            <div>
                 {% for comments in post.comment_set.all %}
                     <div class="comm-post"> {{ comments.text }} </div>
-                    <i>Aвтор комментария: {{ comments.author|capfirst }}</i><br><br>
+                    <i>Aвтор комментария: {{ comments.author|capfirst }}
+                    <br>Опубликовано: {{ comments.created }}<br><br></i>
 
                 {% endfor %}
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
+        <a href="{% url 'blog:add_comment' id=post.id %}">Добавить комментарий</a>
+  </div>
+{% endif %}
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'add_comment' id=post.id %}">Добавить комментарий</a>
-    {% endif %}
-
+<br><br>
 {% endblock %}

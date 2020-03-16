@@ -20,14 +20,16 @@ class Post(models.Model):
         return self.title
 
     class Meta:
+        ordering =('-published_date',)
         verbose_name = "Статья"
         verbose_name_plural = "Статьи"
 
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)         #TODO сделать автоматичискую авторизацию автора
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField("Text")
+    created = models.DateTimeField (auto_now_add=True)
 
     def __str__(self):
         return self.text
@@ -35,3 +37,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
+        ordering = ("-created",)

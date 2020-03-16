@@ -1,14 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 from django.utils import timezone
-from .models import Post, Comment
+from .models import Post
 from .forms import PostForm, CommentForm
 
 
 
 #Список всех постов
-def post_list(request):
+class PostListView(ListView):
+    context_object_name = "posts"
+    template_name = 'blog/post_list.html'
+
+    def get_queryset(self):
+        return Post.objects.order_by("-created_date")
+
+"""def post_list(request):
     posts = Post.objects.order_by("-published_date")
-    return render(request, 'blog/post_list.html', {"posts" : posts})
+    return render(request, 'blog/post_list.html', {"posts" : posts})"""
 
 #Детальное отображение выбранного поста
 def post_detail(request, id):
@@ -24,7 +32,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -39,7 +47,7 @@ def post_edit(request, id):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -57,7 +65,10 @@ def comment_new(request, id):
             comment.post = post
             comment.author = request.user
             comment.save ()
-            return redirect('post_detail', id=post.id)
+            return redirect('blog:post_detail', id=post.id)
     else:
         form = CommentForm()
     return render(request, 'blog/comment_new.html', {"form":form})
+
+def welcome(request):
+    return render(request, 'blog/welcome.html')
