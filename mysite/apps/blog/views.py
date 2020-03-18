@@ -3,49 +3,68 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm, CommentForm
 from django.views.generic import ListView, DetailView
+from .bank_foo import bank, currency
+from taggit.models import Tag
 
-
-
-#Список всех постов
-class PostListView(ListView):
+# Список всех постов
+"""
+    class PostListView(ListView):
     context_object_name = "posts"
-    template_name = 'blog/post_list.html'
-
-    def get_queryset(self):
+    template_name = 'blog/post_list.html
+    
+        def get_queryset(self):
         return Post.objects.order_by("-created_date")
+"""
 
-class PostDetailView(DetailView):
+
+def post_list(request, tag_slug=None):
+    posts = Post.objects.all ()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404 (Tag, slug=tag_slug)
+        posts = posts.filter (tags__in=[tag])
+
+    return render (request, 'blog/post_list.html', {'posts': posts,
+                                                    'tag': tag})
+
+
+class PostDetailView (DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
-#Создание через форму нового поста
+
+# Создание через форму нового поста
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
+        form = PostForm (request.POST)
+        if form.is_valid ():
+            post = form.save (commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('blog:post_detail', pk=post.pk)
+            post.published_date = timezone.now ()
+            post.save ()
+            for tag in form.cleaned_data['tags']:
+                post.tags.add(tag)
+            return redirect ('blog:post_detail', pk=post.pk)
     else:
-        form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
+        form = PostForm ()
+    return render (request, 'blog/post_edit.html', {'form': form})
+
 
 # Редактирование через форму выбранный пост
 def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404 (Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
+        form = PostForm (request.POST, instance=post)
+        if form.is_valid ():
+            post = form.save (commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('blog:post_detail', pk=post.pk)
+            post.published_date = timezone.now ()
+            post.save ()
+            return redirect ('blog:post_detail', pk=post.pk)
     else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+        form = PostForm (instance=post)
+    return render (request, 'blog/post_edit.html', {'form': form})
 
 
 def comment_new(request, pk):
@@ -57,14 +76,24 @@ def comment_new(request, pk):
             comment.post = post
             comment.author = request.user
             comment.save ()
-            return redirect('blog:post_detail', pk=post.pk)
+            return redirect ('blog:post_detail', pk=post.pk)
     else:
-        form = CommentForm()
-    return render(request, 'blog/comment_new.html', {"form":form})
+        form = CommentForm ()
+    return render (request, 'blog/comment_new.html', {"form": form})
+
 
 def welcome(request):
-    return render(request, 'blog/welcome.html')
+    return render (request, 'blog/welcome.html')
+
 
 def new_search(request):
-    search = request.POST.get('search')
-    return render(request, 'blog/new_search.html', {'search': search})
+    search = request.POST.get ('search')
+    return render (request, 'blog/new_search.html', {'search': search})
+
+
+def bank_list(request):
+    context = {
+        'banks': bank,
+        'currency': currency,
+    }
+    return render (request, 'blog/bank_list.html', context)

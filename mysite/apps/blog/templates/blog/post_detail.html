@@ -26,8 +26,8 @@
             <div>
                 {% for comments in post.comment_set.all %}
                     <div class="comm-post"> {{ comments.text }} </div>
-                    <i>Aвтор комментария: {{ comments.author|capfirst }}
-                    <br>Опубликовано: {{ comments.created }}<br><br></i>
+                    <i> {{ comments.author|capfirst }},
+                     {{ comments.created }}<br><br></i>
 
                 {% endfor %}
             </div>

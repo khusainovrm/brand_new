@@ -3,9 +3,11 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-
- <h1 class="header center orange-text">Список статьей</h1>
-
+{# <h1 class="header center orange-text">Список статьей</h1> #}
+        {% if tag  %}
+            <h3 class="header center orange-text">Список статьей с тэгом: "{{ tag.name }}"</h3>
+        {% endif %}
+    <br>
     <div class="row">
         {% for post in posts %}
         {% if post.published_date != None %}
@@ -20,6 +22,19 @@
                     <div class="card-content">
                         <p>{{ post.text }}</p>
                     </div>
+
+                    {# Adding tags #}
+                    {% if post.tags.all != None %}
+                         <p class="card-content">Метки:
+                             {% for tag in post.tags.all %}
+                                <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                                    {{ tag.name }}
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                             {% endfor %}
+
+                         </p>
+                    {% endif %}
                     <div class="card-action">
                         <a href="{% url 'blog:post_detail' pk=post.pk %}"> Читать</a>
                         {% if user.is_authenticated %}
