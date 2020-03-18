@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 
 
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField("Title", max_length=200)
@@ -13,6 +14,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(default=timezone.now, blank=True, null=True)
     me = User.objects.get (username='rinat')
     tags = TaggableManager (blank=True, verbose_name='Теги')
+
 
     def publish(self):
         self.published_date = timezone.now()

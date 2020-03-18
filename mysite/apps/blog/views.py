@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView
 from .bank_foo import bank, currency
 from taggit.models import Tag
 
+
 # Список всех постов
 """
     class PostListView(ListView):
@@ -18,7 +19,7 @@ from taggit.models import Tag
 
 
 def post_list(request, tag_slug=None):
-    posts = Post.objects.all ()
+    posts = Post.objects.order_by ("-created_date")
     tag = None
 
     if tag_slug:
@@ -61,6 +62,8 @@ def post_edit(request, pk):
             post.author = request.user
             post.published_date = timezone.now ()
             post.save ()
+            for tag in form.cleaned_data['tags']:
+                post.tags.set(tag)
             return redirect ('blog:post_detail', pk=post.pk)
     else:
         form = PostForm (instance=post)

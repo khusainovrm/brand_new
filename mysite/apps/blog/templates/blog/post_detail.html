@@ -9,8 +9,8 @@
         <p>Опубликовано: {{ post.published_date }} </p>
     {% endif %}
 
-        <h1><span class="blue-text text-darken-2">{{ post.title }}</span></h1>
-    <p>{{ post.text|linebreaksbr }}</p>
+        <h1><span class="blue-text text-darken-2">{{ post.title|safe }}</span></h1>
+    <p>{{ post.text|safe }}</p>
 
     {% if user.is_authenticated %}
         <a href="{% url 'blog:post_edit' pk=post.pk %}">Редактировать</a>
@@ -25,7 +25,7 @@
             <h5> <i> Комментарии: </i></h5>
             <div>
                 {% for comments in post.comment_set.all %}
-                    <div class="comm-post"> {{ comments.text }} </div>
+                    <div class="comm-post"> {{ comments.text|safe }} </div>
                     <i> {{ comments.author|capfirst }},
                      {{ comments.created }}<br><br></i>
 

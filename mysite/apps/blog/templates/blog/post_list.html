@@ -20,21 +20,21 @@
                         <p><b>{{ post.title }}</b></p>
                     </div>
                     <div class="card-content">
-                        <p>{{ post.text }}</p>
+                        <p>{{ post.text |safe}}</p>
                     </div>
 
                     {# Adding tags #}
-                    {% if post.tags.all != None %}
-                         <p class="card-content">Метки:
+                    {% if post.tags.all %}
+                         <p class="card-content">Тэги:
                              {% for tag in post.tags.all %}
-                                <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-                                    {{ tag.name }}
-                                </a>
-                                {% if not forloop.last %}, {% endif %}
+                                <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}</a>
+                                {% if not forloop.last %},
+                                {% endif %}
                              {% endfor %}
 
                          </p>
                     {% endif %}
+
                     <div class="card-action">
                         <a href="{% url 'blog:post_detail' pk=post.pk %}"> Читать</a>
                         {% if user.is_authenticated %}
