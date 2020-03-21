@@ -3,8 +3,9 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm, CommentForm
 from django.views.generic import ListView, DetailView
-from .bank_foo import bank, currency
 from taggit.models import Tag
+from .cuture_news import culture
+
 
 
 # Список всех постов
@@ -94,9 +95,10 @@ def new_search(request):
     return render (request, 'blog/new_search.html', {'search': search})
 
 
-def bank_list(request):
+def culture_news(request):
     context = {
-        'banks': bank,
-        'currency': currency,
+        'culture': culture,
     }
-    return render (request, 'blog/bank_list.html', context)
+    return render (request, 'blog/culture_news.html', context)
+
+

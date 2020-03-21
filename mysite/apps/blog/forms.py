@@ -26,6 +26,7 @@ class PostForm(forms.ModelForm):
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['height', ['height']],
                         ['misc', ['codeview']],
+                        ['insert', ['link', 'picture']],
                     ],
 
                 },

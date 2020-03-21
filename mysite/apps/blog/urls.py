@@ -14,7 +14,7 @@ urlpatterns = [
     path ('post/<int:pk>/comment/', views.comment_new, name='add_comment'),
     path ('welcome/', views.welcome, name='welcome'),
     path ('search/', views.new_search, name='new_search'),
-    path ('banklist/', views.bank_list, name = 'bank_list'),
+    path ('culture-news/', views.culture_news, name = 'culture_news'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
 

@@ -136,3 +136,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+        'width': '100%',
+        'height': '480',
+        'toolbar': ['bold', 'italic', 'underline'],
+    },
+    'disable_attachment': True,
+}
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
